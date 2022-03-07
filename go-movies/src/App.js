@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route, Link, useRouteMatch } from 'rea
 import Movies from "./components/Movies";
 import Admin from "./components/Admin";
 import Home from "./components/Home";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import Categories from "./components/Categories";
 import OneMovie from "./components/OneMovie";
 

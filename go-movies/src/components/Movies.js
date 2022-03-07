@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default class Movies extends Component {
     state = {
@@ -31,7 +31,7 @@ export default class Movies extends Component {
                         });
                     }
                 );
-            })
+            });
     }
 
     render() {
@@ -46,8 +46,8 @@ export default class Movies extends Component {
                     <h2>Choose a movie</h2>
                     <ul>
                         {movies.map((m) => (
-                            <li key={m.id}>
-                                <Link to={`/movies/${m.id}`}>{m.title}</Link>
+                            <li key={m.ID}>
+                                <Link to={`/movies/${m.ID}`}>{m.title}</Link>
                             </li>
                         ))}
                     </ul>
