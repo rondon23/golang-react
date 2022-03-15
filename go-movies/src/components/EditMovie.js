@@ -27,6 +27,7 @@ export default class EditMovie extends Component {
             ],
             isLoaded: false,
             error: null,
+            errors: [],
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -34,9 +35,36 @@ export default class EditMovie extends Component {
     }
 
     handleSubmit = (evt) => {
-        console.log("Form was submitted")
         evt.preventDefault();
-    }
+
+        // client side validation
+
+        let errors = [];
+        if(this.state.movie.title === ""){
+            errors.push("title");
+        }
+
+        this.setState({errors: errors});
+
+        if(errors.length > 0){
+            return false;            
+        }
+
+        const data = new FormData(evt.target)
+        const payload = Object.fromEntries(data.entries());
+        console.log(payload);
+
+        const requestOptions = {
+            method: 'POST',
+            body: JSON.stringify(payload)
+        }
+
+        fetch('http://localhost:4000/v1/admin/editmovie', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+    };
 
     handleChange = (evt) => {
         let value = evt.target.value;
@@ -47,6 +75,10 @@ export default class EditMovie extends Component {
                 [name]: value,
             }
         }));
+    };
+
+    hasError(key){
+        return this.state.errors.indexOf(key) !== -1;
     }
 
     componentDidMount() {
@@ -115,10 +147,13 @@ export default class EditMovie extends Component {
 
                         <Input
                             title={"Title"}
+                            className={this.hasError("title") ? "is-invalid" : ""}
                             type={'text'}
                             name={'title'}
                             value={movie.title}
                             handleChange={this.handleChange}
+                            errorDiv={this.hasError("title") ? "text-danger" : "d-none"}
+                            errorMsg={"Please enter a title"}
                         />
 
                         <Input
