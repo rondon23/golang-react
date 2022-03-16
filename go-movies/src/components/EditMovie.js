@@ -3,6 +3,7 @@ import './EditMovie.css';
 import Input from './form-components/Input';
 import Select from './form-components/Select';
 import TextArea from './form-components/TextArea';
+import Alert from './form-components/ui-components/Alert';
 
 export default class EditMovie extends Component {
 
@@ -28,6 +29,10 @@ export default class EditMovie extends Component {
             isLoaded: false,
             error: null,
             errors: [],
+            alert: {
+                type: "d-none",
+                message: "",
+            }
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -40,14 +45,14 @@ export default class EditMovie extends Component {
         // client side validation
 
         let errors = [];
-        if(this.state.movie.title === ""){
+        if (this.state.movie.title === "") {
             errors.push("title");
         }
 
-        this.setState({errors: errors});
+        this.setState({ errors: errors });
 
-        if(errors.length > 0){
-            return false;            
+        if (errors.length > 0) {
+            return false;
         }
 
         const data = new FormData(evt.target)
@@ -62,7 +67,15 @@ export default class EditMovie extends Component {
         fetch('http://localhost:4000/v1/admin/editmovie', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                if (data.error) {
+                    this.setState({
+                        alert: { type: "alert-danger", message: data.error.message }
+                    });
+                } else {
+                    this.setState({
+                        alert: { type: "alert-success", message: "Changes saved!" }
+                    });
+                }
             })
     };
 
@@ -77,7 +90,7 @@ export default class EditMovie extends Component {
         }));
     };
 
-    hasError(key){
+    hasError(key) {
         return this.state.errors.indexOf(key) !== -1;
     }
 
@@ -135,6 +148,12 @@ export default class EditMovie extends Component {
             return (
                 <Fragment>
                     <h2>Add/Edit Movie</h2>
+
+                    <Alert
+                        alertType={this.state.alert.type}
+                        alertMessage={this.state.alert.message}
+                    />
+
                     <hr />
                     <form onSubmit={this.handleSubmit}>
                         <input
@@ -201,10 +220,6 @@ export default class EditMovie extends Component {
 
                         <button className="btn btn-primary">Save</button>
                     </form>
-
-                    <div className="mt-3">
-                        <pre>{JSON.stringify(this.state, null, 3)}</pre>
-                    </div>
                 </Fragment>
             );
         }
