@@ -5,6 +5,8 @@ import Input from './form-components/Input';
 import Select from './form-components/Select';
 import TextArea from './form-components/TextArea';
 import Alert from './form-components/ui-components/Alert';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 export default class EditMovie extends Component {
 
@@ -138,8 +140,23 @@ export default class EditMovie extends Component {
         }
     }
 
-    confirmDelete = (e) =>{
+    confirmDelete = (e) => {
         console.log("would delete movie id", this.state.movie.id)
+
+        confirmAlert({
+            title: 'Delete Movie?',
+            message: 'Are you sure?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => alert('Click Yes')
+                },
+                {
+                    label: 'No',
+                    onClick: () => { }
+                }
+            ]
+        });
     }
 
     render() {
