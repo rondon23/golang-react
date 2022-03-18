@@ -60,7 +60,6 @@ export default class EditMovie extends Component {
 
         const data = new FormData(evt.target)
         const payload = Object.fromEntries(data.entries());
-        console.log(payload);
 
         const requestOptions = {
             method: 'POST',
@@ -75,8 +74,8 @@ export default class EditMovie extends Component {
                         alert: { type: "alert-danger", message: data.error.message }
                     });
                 } else {
-                    this.setState({
-                        alert: { type: "alert-success", message: "Changes saved!" }
+                    this.props.history.push({
+                        pathname: "/admin",
                     });
                 }
             })
