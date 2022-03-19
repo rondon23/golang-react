@@ -22,8 +22,8 @@ export default class Login extends Component {
     }
 
     handleChange = (evt) => {
-        let value = this.target.value;
-        let name = this.target.name;
+        let value = evt.target.value;
+        let name = evt.target.name;
         this.setState((prevState) => ({
             ...prevState,
             [name]: value,
@@ -32,6 +32,46 @@ export default class Login extends Component {
 
     handleSubmit = (evt) => {
         evt.preventDefault();
+
+        let errors = [];
+
+        if (this.state.email === "") {
+            errors.push("email");
+        }
+
+        if (this.state.password === "") {
+            errors.push("password");
+        }
+
+        this.setState({ errors: errors })
+
+        if (errors.length > 0) {
+            return false;
+        }
+
+        const data = new FormData(evt.target);
+        const payload = Object.fromEntries(data.entries())
+
+        const requestOptions = {
+            method: "POST",
+            body: JSON.stringify(payload),
+        }
+
+        fetch("http://localhost:4000/v1/signin", requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.error) {
+                    this.setState({
+                        alert: {
+                            type: "alert-danger",
+                            message: data.error.message,
+                        }
+                    })
+                } else {
+                    console.log(data);
+                }
+            })
+
     }
 
     hasError(key) {
@@ -69,7 +109,7 @@ export default class Login extends Component {
                         errorMsg={"Please enter a password"}
                     />
 
-                    <hr/>
+                    <hr />
 
                     <button className="btn btn-primary">Login</button>
                 </form>
