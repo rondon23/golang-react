@@ -74,6 +74,11 @@ export default class App extends Component {
                     </Fragment>
                   )}
                 </ul>
+
+                    <pre>
+                      {JSON.stringify(this.state, null, 3)}
+                    </pre>
+
               </nav>
             </div>
 
