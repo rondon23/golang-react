@@ -101,7 +101,14 @@ export default class EditMovie extends Component {
     }
 
     componentDidMount() {
-        console.log("JWT in EditMovie componentDidMount", this.props.jwt);
+        if (this.props.jwt === "") {
+            this.props.history.push({
+                pathname: "/login",
+            });
+            return;
+        }
+
+
         const id = this.props.match.params.id;
 
         if (id > 0) {
