@@ -21,6 +21,8 @@ func (app *application) routes() http.Handler {
 
 	router.HandlerFunc(http.MethodGet, "/status", app.statusHandler)
 
+	router.HandlerFunc(http.MethodPost, "/v1/graphql/list", app.moviesGraphQL)
+
 	router.HandlerFunc(http.MethodPost, "/v1/signin", app.Signin)
 
 	router.HandlerFunc(http.MethodGet, "/v1/movie/:id", app.getOneMovie)
@@ -29,8 +31,6 @@ func (app *application) routes() http.Handler {
 	router.HandlerFunc(http.MethodGet, "/v1/genres", app.getAllGenres)
 
 	router.POST("/v1/admin/editmovie", app.wrap(secure.ThenFunc(app.editmovie)))
-	// router.HandlerFunc(http.MethodPost, "/v1/admin/editmovie", app.editmovie)
-	// router.HandlerFunc(http.MethodGet, "/v1/admin/deletemovie/:id", app.deleteMovie)
 	router.GET("/v1/admin/deletemovie/:id", app.wrap(secure.ThenFunc(app.deleteMovie)))
 
 	return app.enableCORS(router)
