@@ -57,4 +57,11 @@ Tela de Login:
 
 ![image](https://user-images.githubusercontent.com/36419978/161081839-145bf487-e231-4c67-9355-d7d97b2f0a2d.png)
 
+Estrutura do Banco de Dados:
+
+![image](https://user-images.githubusercontent.com/36419978/161116374-1f72c9cc-c72c-424b-b510-b094022aca79.png)
+
+Para Rodar o Front end use npm start.
+
+Para Rodar o Back end use go run cmd/api/*.go
 
