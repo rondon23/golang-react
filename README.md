@@ -50,7 +50,8 @@ A arquitetura de front end segue a seguinte estrutura:
 
 Layout de Front-End inicial:
 
-        ![image](https://user-images.githubusercontent.com/36419978/161081387-e6840e22-dd48-4773-85d9-20c0eb0155da.png)
+ ![image](https://user-images.githubusercontent.com/36419978/161082258-de720208-49a5-4646-acc8-5348f98fca40.png)
+
         
 Tela de Login:
 
