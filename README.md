@@ -47,5 +47,13 @@ A arquitetura de front end segue a seguinte estrutura:
  ┣ 📜directoryList.md \
  ┣ 📜index.css \
  ┗ 📜index.js
-  
+
+Layout de Front-End inicial:
+
+        ![image](https://user-images.githubusercontent.com/36419978/161081387-e6840e22-dd48-4773-85d9-20c0eb0155da.png)
         
+Tela de Login:
+
+![image](https://user-images.githubusercontent.com/36419978/161081839-145bf487-e231-4c67-9355-d7d97b2f0a2d.png)
+
+
