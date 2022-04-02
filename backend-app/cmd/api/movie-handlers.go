@@ -223,7 +223,7 @@ func getPoster(movie models.Movie) models.Movie {
 		return movie
 	}
 	defer resp.Body.Close()
-	bodyBytes, err := io.ReadAll(response.Body)
+	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Println(err)
 		return movie
