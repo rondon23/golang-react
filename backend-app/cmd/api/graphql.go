@@ -102,6 +102,9 @@ var movieType = graphql.NewObject(graphql.ObjectConfig{
 		"updated_at": &graphql.Field{
 			Type: graphql.DateTime,
 		},
+		"poster": &graphql.Field{
+			Type: graphql.String,
+		},
 	},
 },
 )
